@@ -10,19 +10,21 @@ std::vector<HWND> windows;
 
 BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM)
 {
-	windows.push_back(hwnd);
-
+	if (IsWindowVisible(hwnd))
+	{
+		windows.push_back(hwnd);
+	}
+	
 	return TRUE;
 }
 
 int main()
 {
+	windows.reserve(512);
 	EnumWindows(EnumWindowsProc, NULL);
 
-	for (HWND window : windows)
+	for (const auto window : windows)
 	{
-		if (!IsWindowVisible(window)) continue;
-
 		RECT rect;
 		GetWindowRect(window, &rect);
 
@@ -32,5 +34,5 @@ int main()
 		}
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
