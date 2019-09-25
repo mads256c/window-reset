@@ -8,29 +8,29 @@
 
 std::vector<HWND> windows;
 
-BOOL CALLBACK EnumWindowsProc(const HWND hwnd, LPARAM)
+BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM)
 {
 	windows.push_back(hwnd);
-	
+
 	return TRUE;
 }
 
 int main()
 {
-    EnumWindows(EnumWindowsProc, NULL);
+	EnumWindows(EnumWindowsProc, NULL);
 
-    for (HWND window : windows)
-    {
+	for (HWND window : windows)
+	{
 		if (!IsWindowVisible(window)) continue;
 
 		RECT rect;
-    	GetWindowRect(window, &rect);
+		GetWindowRect(window, &rect);
 
-    	if (rect.left < 0)
-    	{
-    		SetWindowPos(window, HWND_NOTOPMOST, 0, 0, -rect.left + rect.right, -rect.top + rect.bottom, NULL);
-    	}
-    }
+		if (rect.right <= 0 || rect.left < -10)
+		{
+			SetWindowPos(window, NULL, 1920 + rect.left, rect.top, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+		}
+	}
 
 	return 0;
 }
