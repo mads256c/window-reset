@@ -18,11 +18,34 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM unused)
 	return TRUE;
 }
 
-int main()
+_Releases_lock_(hMutex)
+int CALLBACK WinMain(
+    HINSTANCE   hInstance,
+    HINSTANCE   hPrevInstance,
+    LPSTR       lpCmdLine,
+    int         nCmdShow
+    )
 {
+	UNREFERENCED_PARAMETER(hInstance);
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
+	UNREFERENCED_PARAMETER(nCmdShow);
+	
+	HANDLE hMutex = OpenMutex(
+      MUTEX_ALL_ACCESS, 0, L"window-reset");
+
+	if (hMutex)
+	{
+		MessageBoxA(NULL, "Another instance of this program is running.", "Window Reset", MB_OK);
+		return EXIT_FAILURE;
+	}
+	
+	hMutex = CreateMutex(0, 0, L"window-reset");
+
+
 	if (!RegisterHotKey(NULL, 1, MOD_CONTROL | MOD_ALT | MOD_NOREPEAT, 0x4D))
 	{
-		MessageBoxA(NULL, "Shit does not fucking work", "Window Reset", MB_OK);
+		MessageBoxA(NULL, "Failed to create hotkey.", "Window Reset", MB_OK);
 		return EXIT_FAILURE;
 	}
 
@@ -35,5 +58,6 @@ int main()
 		}
 	}
 
+	ReleaseMutex(hMutex);
 	return EXIT_SUCCESS;
 }
