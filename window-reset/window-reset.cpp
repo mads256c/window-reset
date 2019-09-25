@@ -6,13 +6,12 @@
 
 #include <Windows.h>
 
-std::vector<HWND> windows;
 
-BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM)
+BOOL CALLBACK EnumWindowsProc(HWND hwnd, const LPARAM windows)
 {
 	if (IsWindowVisible(hwnd))
 	{
-		windows.push_back(hwnd);
+		reinterpret_cast<std::vector<HWND>*>(windows)->push_back(hwnd);
 	}
 	
 	return TRUE;
@@ -20,8 +19,9 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM)
 
 int main()
 {
+	std::vector<HWND> windows;
 	windows.reserve(512);
-	EnumWindows(EnumWindowsProc, NULL);
+	EnumWindows(EnumWindowsProc, reinterpret_cast<LPARAM>(&windows));
 
 	for (const auto window : windows)
 	{
@@ -30,7 +30,7 @@ int main()
 
 		if (rect.right <= 0 || rect.left < -10)
 		{
-			SetWindowPos(window, NULL, 1920 + rect.left, rect.top, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+			SetWindowPos(window, nullptr, 1920 + rect.left, rect.top, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
 		}
 	}
 
