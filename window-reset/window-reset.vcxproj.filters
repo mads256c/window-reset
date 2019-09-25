@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="window-reset.cpp">
+    <ClCompile Include="window-reset.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
