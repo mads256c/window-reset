@@ -1,4 +1,7 @@
 ﻿#include "slim_win32.h"
+
+#include <consoleapi.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 
