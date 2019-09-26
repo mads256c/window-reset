@@ -40,6 +40,8 @@
 #define NODEFERWINDOWPOS  // DeferWindowPos routines
 #define NOMCX             // Modem Configuration Extensions
 
+#define STRICT
+
 #include <Windows.h>
 #include <stdlib.h>
 
