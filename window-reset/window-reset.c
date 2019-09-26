@@ -39,6 +39,15 @@
 #define NOPROFILER        // Profiler interface.
 #define NODEFERWINDOWPOS  // DeferWindowPos routines
 #define NOMCX             // Modem Configuration Extensions
+#define NOIME
+#define NOAPISET
+#define NOWINDOWSTATION
+#define NOSECURITY
+#define NONCMESSAGES
+#define NOTRACKMOUSEEVENT
+#define NOMDI
+#define NOSYSPARAMSINFO
+#define NOWINABLE
 
 #define STRICT
 
