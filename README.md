@@ -11,6 +11,6 @@ When the program is launched press the hotkey in config.h to move the windows to
 ## Configuring
 Configuring the program happens in config.h. Right now it is only possible to change the hotkey.
 
-### FAQ
-#### Certain windows like Task Manager does not move
+## FAQ
+### Certain windows like Task Manager does not move
 Some programs are protected, to move these programs run window-reset.exe as administrator.
