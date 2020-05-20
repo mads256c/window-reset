@@ -2,7 +2,7 @@
 Moves windows that are not on the primary screen back to the primary screen. Currently only works with windows.
 
 # Downlading
-You can download this program from the github actions on this repo. There is both debug and release build for both x86 and x64. You can find them under actions then under artifacts.
+You can download this program from the github actions on this repo. There is both debug and release build for both x86 and x64. You can find them under actions then under artifacts. Or you can just click [here](https://github.com/mads256h/window-reset/actions?query=branch%3Amaster).
 
 # Developing
 
